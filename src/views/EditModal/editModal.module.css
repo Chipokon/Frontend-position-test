@@ -1,0 +1,31 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 2%;
+    background-color: grey;
+    border: 2px solid #000;
+    border-radius: 2%;
+    height: 20%;
+}
+
+.blockInside {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.input {
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    color: black;
+}
+.button {
+    margin-top: 4%;
+    width: 12vw;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    color: black;
+    left: 25%;
+}
