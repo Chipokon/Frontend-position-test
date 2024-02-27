@@ -1,0 +1,16 @@
+.backButton {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  color: black;
+}
+
+.header {
+  margin-bottom: 1%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search{
+    background-color: #f8f9fa;
+    border-radius: 4%;
+}

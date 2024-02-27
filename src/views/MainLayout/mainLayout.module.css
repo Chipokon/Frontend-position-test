@@ -1,0 +1,19 @@
+.buttonBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.buttonBlock > * {
+    margin: 0 8px; 
+  }
+
+.button {
+    width: 12vw;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    color: black;
+}
+.button:hover {
+    border-color: #f8f9fa; /* Изменяем цвет рамки при наведении */
+}
