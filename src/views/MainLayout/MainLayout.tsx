@@ -1,13 +1,11 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { StyledEngineProvider } from "@mui/system";
 import styles from './mainLayout.module.css'
 import { observer } from "mobx-react-lite";
 import {useStores} from '../../customHooks/UseStore'
 const MainLayout = observer(() => {
   const store = useStores().TableStore
   return (
-    <StyledEngineProvider injectFirst>
       <div>
         <div className={styles.buttonBlock}>
         <Link to="/products">
@@ -21,7 +19,6 @@ const MainLayout = observer(() => {
         </Link>
         </div>
       </div>
-    </StyledEngineProvider>
   );
 });
 

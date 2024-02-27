@@ -1,12 +1,6 @@
-.table{
-    display: flex;
-    text-align: center; 
-    vertical-align: middle;
-    padding: 2%;
-    width: 100%;
-}
 
 .headCells{
-   font-size: large;
+   font-size: 16px;
+   font-weight: 600;
 }
 
