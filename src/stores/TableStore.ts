@@ -253,6 +253,7 @@ class TableStore {
   currentTableData = [];
   currentTableDataCopy = [];
   searchTerm = "";
+  selectedValue = null;
   constructor() {
     makeAutoObservable(this);
   }
@@ -285,6 +286,18 @@ class TableStore {
     }
     return "";
   };
+
+  setNewValueInTable = (index, key, newValue) => {
+    console.log(index);
+    
+    if (index >= 0 && index < this.currentTableData.length) {
+      this.currentTableData[index][key] = newValue;
+    }
+  }
+
+  setSelectedValue = (value) => {
+    this.selectedValue = value;
+  }
 }
 
 export default TableStore;
