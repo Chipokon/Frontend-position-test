@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { useStores } from "../../customHooks/UseStore";
 import styles from "./tableComponent.module.css";
-import moment from 'moment'
+import moment from "moment";
 const TableComponent = observer(() => {
   const store = useStores().TableStore;
   const getKeysNames = (obj) => {
@@ -43,7 +43,11 @@ const TableComponent = observer(() => {
           </TableCell>
         );
       } else if (Date.parse(value)) {
-        return <TableCell key={index}>{moment(value).format('DD-MM-YYYY hh:mm')}</TableCell>;
+        return (
+          <TableCell key={index}>
+            {moment(value).format("DD-MM-YYYY hh:mm")}
+          </TableCell>
+        );
       } else {
         return (
           <TableCell component="th" key={index}>
@@ -55,14 +59,14 @@ const TableComponent = observer(() => {
   };
 
   return (
-    <>
+    <div>
       <TableContainer component={Paper}>
-        <Table className={styles.table} aria-label="simple table">
-          <TableHead className={styles.headCells}>
+        <Table aria-label="simple table">
+          <TableHead>
             <TableRow>
               {store.currentTableData.length > 0 &&
                 getKeysNames(store.currentTableData[0]).map((key) => (
-                  <TableCell key={key}>
+                  <TableCell className={styles.headCells} key={key}>
                     {key[0].toUpperCase() + key.slice(1)}
                   </TableCell>
                 ))}
@@ -75,7 +79,7 @@ const TableComponent = observer(() => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </div>
   );
 });
 
