@@ -14,7 +14,7 @@ const EditModal = observer(({ selectedValue, onSave, onClose }) => {
   };
   return (
     <Modal
-      open={selectedValue !== null}
+      open={selectedValue.length > 0}
       onClose={onClose}
       className={styles.modal}
     >
