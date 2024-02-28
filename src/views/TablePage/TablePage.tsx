@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { useStores } from "../../customHooks/UseStore";
 import styles from "./tablePage.module.css";
 import TableComponent from "../TableComponent/TableComponent";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
-const Tablepage = observer(() => {
-  const store = useStores().TableStore;
+import { EntityType, storeType } from "../../stores/types";
+const Tablepage:FC = observer(() => {
+  const store: storeType = useStores().TableStore;
   const currentPath = window.location.pathname.split("/").pop();
   useEffect(() => {
     if ((store.typeOfTable && store[store.typeOfTable]) || currentPath) {
@@ -20,11 +21,6 @@ const Tablepage = observer(() => {
       <div className={styles.header}>
         <Button
           className={styles.backButton}
-          style={{
-            borderColor: "#f8f9fa",
-            backgroundColor: "#f8f9fa",
-            color: "black",
-          }}
           component={Link}
           to="/"
           variant="outlined"
@@ -37,8 +33,8 @@ const Tablepage = observer(() => {
           options={store?.currentTableData}
           sx={{ width: 300 }}
           value={store.searchTerm}
-          onChange={store.handleSearch}
-          getOptionLabel={(option) => store.getFirstStringValue(option)}
+          onChange={(event, value: EntityType, reason) => store.handleSearch(event, value, reason)} 
+          getOptionLabel={(option: EntityType) => store.getFirstStringValue(option)}
           renderInput={(params) => <TextField {...params} />}
           className={styles.search}
         />
