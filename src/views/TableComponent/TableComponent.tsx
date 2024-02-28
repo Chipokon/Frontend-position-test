@@ -1,6 +1,5 @@
-
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
+import { FC, useState } from "react";
 import {
   Button,
   Paper,
@@ -15,37 +14,42 @@ import { useStores } from "../../customHooks/UseStore";
 import styles from "./tableComponent.module.css";
 import moment from "moment";
 import EditModal from "../EditModal/EditModal";
+import { EntityType } from "../../stores/types";
 
-const TableComponent = observer(() => {
+const TableComponent: FC = observer(() => {
   const store = useStores().TableStore;
-  const [selectedRowIndex, setSelectedRowIndex] = useState(null);
-  const [selectedKey, setSelectedKey] = useState(null);
-
-  const handleCellClick = (value, index, key) => {
+  const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
+  const [selectedKey, setSelectedKey] = useState("");
+  const [active, setAtctive] = useState(false)
+  const handleCellClick = (value: string, index: number, key: string) => {
     setSelectedRowIndex(index);
     setSelectedKey(key);
     store.setSelectedValue(value);
+    setAtctive(true)
   };
 
   const handleEditModalClose = () => {
+    setAtctive(false)
     setSelectedRowIndex(null);
-    setSelectedKey(null);
-    store.setSelectedValue('');
+    setSelectedKey("");
+    store.setSelectedValue("");
   };
 
-  const handleSaveValue = (newValue) => {
+  const handleSaveValue = (newValue: string) => {
     if (selectedRowIndex !== null && selectedKey) {
       store.setNewValueInTable(selectedRowIndex, selectedKey, newValue);
     }
     handleEditModalClose();
   };
 
-  const getKeysNames = (obj) => {
-    let keys = [];
-    for (let key in obj) {
+  const getKeysNames = (obj: Record<string, unknown>): string[] => {
+    let keys: string[] = [];
+    for (const key in obj) {
       if (typeof obj[key] === "object" && obj[key] !== null) {
         keys = keys.concat(
-          getKeysNames(obj[key]).filter((subKey) => subKey !== key)
+          getKeysNames(obj[key] as Record<string, unknown>).filter(
+            (subKey) => subKey !== key
+          )
         );
       } else {
         keys.push(key);
@@ -54,7 +58,7 @@ const TableComponent = observer(() => {
     return keys;
   };
 
-  const renderTableCells = (item, index) => {
+  const renderTableCells = (item: EntityType, index: number) => {
     return Object.entries(item).map(([key, value], idx) => {
       if (typeof value === "object" && value !== null) {
         return Object.keys(value).map((k, idx) => (
@@ -77,7 +81,9 @@ const TableComponent = observer(() => {
       } else if (typeof value === "string") {
         return (
           <TableCell key={idx}>
-            <Button onClick={() => handleCellClick(value, index, key)}>{value}</Button>
+            <Button onClick={() => handleCellClick(value, index, key)}>
+              {value}
+            </Button>
           </TableCell>
         );
       } else {
@@ -115,6 +121,7 @@ const TableComponent = observer(() => {
         selectedValue={store.selectedValue}
         onSave={handleSaveValue}
         onClose={handleEditModalClose}
+        active={active}
       />
     </div>
   );

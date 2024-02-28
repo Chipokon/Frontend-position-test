@@ -1,11 +1,19 @@
 import { Button, Modal, TextField } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import { useState } from "react";
+import { FC, useState } from "react";
 import styles from "./editModal.module.css";
 
-const EditModal = observer(({ selectedValue, onSave, onClose }) => {
+
+interface EditModalProps {
+    selectedValue: string;
+    onSave: (newValue: string) => void;
+    onClose: () => void;
+    active: boolean;
+  }
+
+const EditModal: FC<EditModalProps> = observer(({ selectedValue, onSave, onClose, active }) => {
   const [newValue, setNewValue] = useState(selectedValue);
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewValue(event.target.value);
   };
   const handleSave = () => {
@@ -14,7 +22,7 @@ const EditModal = observer(({ selectedValue, onSave, onClose }) => {
   };
   return (
     <Modal
-      open={selectedValue?.length > 0}
+      open={active}
       onClose={onClose}
       className={styles.modal}
     >
