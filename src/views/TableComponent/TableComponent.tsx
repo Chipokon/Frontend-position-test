@@ -30,7 +30,7 @@ const TableComponent = observer(() => {
   const handleEditModalClose = () => {
     setSelectedRowIndex(null);
     setSelectedKey(null);
-    store.setSelectedValue(null);
+    store.setSelectedValue('');
   };
 
   const handleSaveValue = (newValue) => {
