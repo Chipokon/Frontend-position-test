@@ -19,10 +19,10 @@ class TableStore implements storeType {
 
   handleSearch: (
     event: React.SyntheticEvent<Element, Event>,
-    value: EntityType,
+    value: EntityType | null,
     reason: string
   ) => void = (event, value, reason) => {
-    this.searchTerm = value;
+    if (value) this.searchTerm = value;
     this.currentTableData = this.currentTableData.filter((item) => {
       for (const key in item) {
         if (

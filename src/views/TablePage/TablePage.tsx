@@ -6,12 +6,18 @@ import TableComponent from "../TableComponent/TableComponent";
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { EntityType, storeType } from "../../stores/types";
-const Tablepage:FC = observer(() => {
+const Tablepage: FC = observer(() => {
   const store: storeType = useStores().TableStore;
   const currentPath = window.location.pathname.split("/").pop();
   useEffect(() => {
-    if ((store.typeOfTable && store[store.typeOfTable]) || currentPath) {
-      store.currentTableData = store[store.typeOfTable] || store[currentPath];
+    if (
+      (store.typeOfTable &&
+        (store as Record<string, any>)[store.typeOfTable]) ||
+      currentPath
+    ) {
+      store.currentTableData =
+        (store as Record<string, any>)[store.typeOfTable] ||
+        (store as Record<string, any>)[currentPath!];
       store.currentTableDataCopy = store.currentTableData;
     }
   }, [store.typeOfTable, currentPath]);
@@ -33,14 +39,18 @@ const Tablepage:FC = observer(() => {
           options={store?.currentTableData}
           sx={{ width: 300 }}
           value={store.searchTerm}
-          onChange={(event, value: EntityType, reason) => store.handleSearch(event, value, reason)} 
-          getOptionLabel={(option: EntityType) => store.getFirstStringValue(option)}
+          onChange={(event, value, reason) =>
+            store.handleSearch(event, value, reason)
+          }
+          getOptionLabel={(option: EntityType) =>
+            store.getFirstStringValue(option)
+          }
           renderInput={(params) => <TextField {...params} />}
           className={styles.search}
         />
       </div>
       <div>
-      <TableComponent />
+        <TableComponent />
       </div>
     </div>
   );

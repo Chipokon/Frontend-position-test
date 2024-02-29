@@ -80,8 +80,8 @@ const TableComponent: FC = observer(() => {
         );
       } else if (typeof value === "string") {
         return (
-          <TableCell key={idx}>
-            <Button onClick={() => handleCellClick(value, index, key)}>
+          <TableCell component="th" key={idx}>
+            <Button onClick={() => handleCellClick(value, index, key)} sx={{textTransform: "none"}}>
               {value}
             </Button>
           </TableCell>
