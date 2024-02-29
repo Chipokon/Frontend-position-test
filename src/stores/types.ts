@@ -6,16 +6,16 @@ export type storeType = {
 
   currentTableData: EntityType[];
   currentTableDataCopy: EntityType[];
-  searchTerm: Record<string, unknown>;
+  searchTerm: EntityType;
   selectedValue: string;
   handleSearch: (
     event: React.SyntheticEvent<Element, Event>,
-    value: EntityType,
+    value: EntityType | null,
     reason: string
   ) => void;
-  getFirstStringValue: (obj: EntityType) => void;
+  getFirstStringValue: (obj: EntityType) => string;
   setNewValueInTable: (index: number, key: string, newValue: string) => void;
   setSelectedValue: (value: string) => void;
 };
 
-export type EntityType = Record<string, any | unknown>;
+export type EntityType = Record<string, any>;
