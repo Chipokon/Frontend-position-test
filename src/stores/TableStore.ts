@@ -23,6 +23,8 @@ class TableStore implements storeType {
     reason: string
   ) => void = (event, value, reason) => {
     if (value) this.searchTerm = value;
+    console.log(this.searchTerm);
+    
     this.currentTableData = this.currentTableData.filter((item) => {
       for (const key in item) {
         if (
@@ -39,9 +41,8 @@ class TableStore implements storeType {
       }
       return false;
     });
-    if (reason === "clear") {
-      this.currentTableData = this.currentTableDataCopy;
-    }
+    if (reason === "clear") this.currentTableData = this.currentTableDataCopy;
+    if (reason === "reset") this.searchTerm = {};
   };
 
   getFirstStringValue = (obj: EntityType) => {
