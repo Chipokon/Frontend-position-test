@@ -30,6 +30,7 @@ const Tablepage: FC = observer(() => {
           component={Link}
           to="/"
           variant="outlined"
+          onClick={() => store.searchTerm = {}}
         >
           Back
         </Button>
